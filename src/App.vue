@@ -1,6 +1,7 @@
 <template>
   <section>
     <router-view class="app-main" />
+    <Auth />
   </section>
 </template>
 
