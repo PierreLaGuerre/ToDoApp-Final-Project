@@ -3,7 +3,7 @@ import Auth from '../pages/Auth.vue';
 import Home from '../pages/Home.vue';
 const routes = [
   {
-    path: '/',
+    path: '/auth',
     name: 'Auth',
     component: Auth,
   },
