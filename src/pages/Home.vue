@@ -17,6 +17,7 @@
   <div class="flex flex-col items-center justify-center">
     <input
       class="bg-yellow-200 text-black py-16 px-8 rounded-lg w-1/4 focus:outline-none focus:shadow-outline ml-5 mb-5"
+      v-model= "newTaskName" 
       type="text"
       placeholder="Cook a lasagna"
     />
@@ -29,106 +30,45 @@
   <h1 class="text-4xl text-red-600 text-center mb-10">ToDo List:</h1>
 
   <div class="flex flex-row">
-    <div
-      class="bg-yellow-200 text-black py-10 px-6 rounded-lg w-1/4 focus:outline-none focus:shadow-outline ml-5 mb-5 flex justify-start flex-wrap  "
-    >
-    <button
-          class="bg-slate-400 hover:bg-slate-300 text-white rounded-lg py-1 px-2 mr-8"
-        >
-          Edit
-        </button>
+<Task v-for=" task in taskStore.tasks " :task="task" /></div>
 
-      
-        <input
-          type="text"
-          placeholder="Task"
-          class="bg-yellow-200 text-center"
-        />
-      
-
-      
-        <button
-          class="bg-red-600 hover:bg-red-500 text-white rounded-lg py-1 px-2"
-        >
-          Delete
-        </button>
-      
-      <div class=" mt-10">
-        
-        <button
-          class=" bg-blue-900 hover:bg-blue-700 text-cyan-300 rounded-lg py-1 px-2"
-        >
-          Did It
-        </button>
-
-      </div>
-
-      
-    </div>
-
-    <div
-      class="bg-yellow-200 text-black py-10 px-6 rounded-lg w-1/4 focus:outline-none focus:shadow-outline ml-5 mb-5 flex justify-start flex-wrap  "
-    >
-    <button
-          class="bg-slate-400 hover:bg-slate-300 text-white rounded-lg py-1 px-2 mr-8"
-        >
-          Edit
-        </button>
-
-      
-        <input
-          type="text"
-          placeholder="Task"
-          class="bg-yellow-200 text-center"
-        />
-      
-
-      
-        <button
-          class="bg-red-600 hover:bg-red-500 text-white rounded-lg py-1 px-2"
-        >
-          Delete
-        </button>
-      
-      <div class=" relative mt-10">
-        <button
-          class=" bg-orange-500 hover:bg-orange-400 text-white rounded-lg py-1 px-2 bottom-0  left-0"
-        >
-          Pending
-        </button>
-       
-
-      </div>
-
-      
-    </div>
-
-    
-  </div>
 </template>
 
 <script setup>
 import { supabase } from "../supabase";
 import { useRouter } from "vue-router";
 import { useTaskStore } from '../store/task';
+import { onMounted } from "vue";
+import { ref } from 'vue'; 
+import { useUserStore } from "../store/user";
+import Task from '../components/Task.vue';
 
-const router = useRouter();
 
-const task = useTaskStore();
+const router = useRouter(); 
+
+const taskStore = useTaskStore();
+console.log(taskStore.tasks)
+const user = useUserStore();
+const newTaskName = $ref('');
+const tasks = $ref('');
+
 
 const logout = async () => {
-  console.log("data");
   await supabase.auth.signOut();
   router.push({ name: "Auth" });
 };
 
 const addTask = async () => {
-  await task.insert();
+  await taskStore.insert({ user_id: user.user.id , name: newTaskName });
 }
 
-const fetchTasks = async () => {
-  await task.fetchTasks();
-}
+onMounted(async () => {
+try {
+  await taskStore.fetchTasks();
+} catch (e) {
+    console.log(e);
+  }
+});
 </script>
 
 <style scoped></style>

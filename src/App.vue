@@ -23,7 +23,7 @@ onMounted(async () => {
       router.push({ path: "/auth" });
     } else {
       // continue to dashboard
-      router.push({ path: "/" });
+      router.push({ path: "/home" });
     }
   } catch (e) {
     console.log(e);
