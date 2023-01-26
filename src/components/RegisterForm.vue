@@ -39,7 +39,7 @@
   import { useRouter } from 'vue-router';
   import {supabase} from '../supabase.js';
   import { useUserStore } from '../store/user';
-  import logo from '../images/logo.png';
+  import logo from '../assets/logo.png';
 
   const router = useRouter();
   const user = useUserStore();

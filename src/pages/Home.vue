@@ -42,7 +42,7 @@ import { onMounted } from "vue";
 import { ref } from 'vue'; 
 import { useUserStore } from "../store/user";
 import Task from '../components/Task.vue';
-import logo from '../images/logo.png';
+import logo from '../assets/logo.png';
 
 const router = useRouter(); 
 
