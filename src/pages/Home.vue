@@ -2,7 +2,7 @@
   <div>
     <nav class="flex items-center justify-between flex-wrap bg-blue-900 p-6">
       <div class="flex items-center flex-shrink-0 text-white mr-6">
-        <img src="../images/logo.png" alt="Logo" class="w-50 h-20" />
+        <img :src="logo" alt="Logo" class="w-50 h-20" />
       </div>
 
       <button @click="logout" class="text-cyan-400 text-xl mr-10">
@@ -42,7 +42,7 @@ import { onMounted } from "vue";
 import { ref } from 'vue'; 
 import { useUserStore } from "../store/user";
 import Task from '../components/Task.vue';
-
+import logo from '../images/logo.png';
 
 const router = useRouter(); 
 

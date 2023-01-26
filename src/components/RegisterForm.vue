@@ -1,7 +1,7 @@
 <template>
    <nav class="flex items-center justify-between flex-wrap bg-blue-900 p-6">
     <div class="flex items-center flex-shrink-0 text-white mr-6">
-      <img src="../images/logo.png" alt="Logo" class="w-50 h-20 " />
+      <img :src="logo" alt="Logo" class="w-50 h-20 " />
     </div>
     
   </nav>
@@ -39,6 +39,7 @@
   import { useRouter } from 'vue-router';
   import {supabase} from '../supabase.js';
   import { useUserStore } from '../store/user';
+  import logo from '../images/logo.png';
 
   const router = useRouter();
   const user = useUserStore();
