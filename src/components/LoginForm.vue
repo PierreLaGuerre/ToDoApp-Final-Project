@@ -2,7 +2,7 @@
    
    <nav class="flex items-center justify-between flex-wrap bg-blue-900 p-6">
     <div class="flex items-center flex-shrink-0 text-white mr-6">
-      <img src="src\images\logo.PNG" alt="Logo" class="w-50 h-20 " />
+      <img src="../images/logo.png" alt="Logo" class="w-50 h-20 " />
     </div>
     
   </nav>

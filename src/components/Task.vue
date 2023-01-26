@@ -11,11 +11,11 @@
       
         <input
           type="text"
-          placeholder="Task"
-          class="bg-yellow-200 text-center"
+                    class="bg-yellow-200 text-center"
+          
         />
       
-
+<p>{{ task.name }}</p>
       
         <button
           class="bg-red-600 hover:bg-red-500 text-white rounded-lg py-1 px-2"
