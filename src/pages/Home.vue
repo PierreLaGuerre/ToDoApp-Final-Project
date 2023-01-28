@@ -5,7 +5,7 @@
         <img :src="logo" alt="Logo" class="w-50 h-20" />
       </div>
 
-      <button @click="logout" class="text-cyan-400 text-xl mr-10">
+      <button @click="logout" class="text-cyan-400 text-3xl mr-10 ">
         Log Out
       </button>
     </nav>
@@ -30,7 +30,7 @@
   <h1 class="text-4xl text-red-600 text-center mb-10">ToDo List:</h1>
 
   <div class="flex flex-row">
-<Task v-for=" task in taskStore.tasks " :task="task" /></div>
+<Task v-for="task in taskStore.tasks " :task="task" /></div>
 
 </template>
 
@@ -39,7 +39,6 @@ import { supabase } from "../supabase";
 import { useRouter } from "vue-router";
 import { useTaskStore } from '../store/task';
 import { onMounted } from "vue";
-import { ref } from 'vue'; 
 import { useUserStore } from "../store/user";
 import Task from '../components/Task.vue';
 import logo from '../assets/logo.png';
@@ -60,12 +59,12 @@ const logout = async () => {
 
 const addTask = async () => {
   await taskStore.insert({ user_id: user.user.id , name: newTaskName });
-  taskStore.fetchTasks();
+  console.log(taskStore.fetchTasks());
 }
 
 onMounted(async () => {
 try {
-  await taskStore.fetchTasks();
+  taskStore.fetchTasks();
 } catch (e) {
     console.log(e);
   }
