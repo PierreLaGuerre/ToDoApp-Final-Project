@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { defineComponent, computed } from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
     props: {
@@ -28,7 +28,6 @@ export default defineComponent({
       }
     },
     setup(props) {
-      console.log(props.task)
       const { task } = props;
       return { task };
     }

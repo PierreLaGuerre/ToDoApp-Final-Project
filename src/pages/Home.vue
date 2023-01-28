@@ -21,8 +21,9 @@
       type="text"
       placeholder="Cook a lasagna"
     />
-    <button @click="addTask" class="bg-blue-800 hover:bg-blue-500 text-white w-1/4 font-medium py-4 px-16 rounded-lg ml-5 mb-8">Add Task
 
+    <button @click="addTask" class="bg-blue-800 hover:bg-blue-500 text-white w-1/4 font-medium py-4 px-16 rounded-lg ml-5 mb-8">
+      Add Task
     </button>
      
   </div>
@@ -44,12 +45,9 @@ import Task from '../components/Task.vue';
 import logo from '../assets/logo.png';
 
 const router = useRouter(); 
-
 const taskStore = useTaskStore();
-console.log(taskStore.tasks)
-const user = useUserStore();
+const { user } = useUserStore();
 const newTaskName = $ref('');
-const tasks = $ref('');
 
 
 const logout = async () => {
@@ -58,13 +56,16 @@ const logout = async () => {
 };
 
 const addTask = async () => {
-  await taskStore.insert({ user_id: user.user.id , name: newTaskName });
-  console.log(taskStore.fetchTasks());
+  const { id } = user;
+  console.log(newTaskName);
+  await taskStore.insert(id, newTaskName);
+  taskStore.fetchTasks()    ;
 }
 
 onMounted(async () => {
 try {
   taskStore.fetchTasks();
+  console.log(user);
 } catch (e) {
     console.log(e);
   }
