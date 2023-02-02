@@ -5,7 +5,7 @@
         <img :src="logo" alt="Logo" class="w-50 h-20" />
       </div>
 
-      <button @click="logout" class="text-cyan-400 text-3xl mr-10">
+      <button @click="logout" class="text-slate-50 text-lg mr-10">
         Log Out
       </button>
     </nav>
@@ -33,7 +33,7 @@
   <h1 class="text-4xl text-red-600 text-center mb-10">ToDo List:</h1>
 
   <div class="flex flex-row">
-    <Task :key="taskKey" v-for="task in taskStore.tasks" :task="task" @deleteTask="deleteTaskById" @changeTask="changeTask"/>
+    <Task :key="taskKey" v-for="task in taskStore.tasks" :task="task" @deleteTask="deleteTaskById" @changeTask="changeTask" @changeStatus="changeStatus"/>
   </div>
 </template>
 
@@ -45,12 +45,21 @@ import { onMounted } from 'vue';
 import { useUserStore } from '../store/user';
 import Task from '../components/Task.vue';
 import logo from '../assets/logo.png';
-
+import { ref } from 'vue'
+ 
 
 const router = useRouter();
 const taskStore = useTaskStore();
 const { user } = useUserStore();
 const newTaskName = $ref('');
+const didIt = ref(false)
+
+function changeStatus () {
+  if (didIt.value === 'true') {
+    didIt.value = 'false';
+  } else (didIt.value === 'false')
+  didIt.value = 'true'
+}
 
 // log out function
 const logout = async () => {
@@ -79,6 +88,7 @@ onMounted(async () => {
   } catch (e) {
     console.log(e);
   }
+
 
 });
 </script>

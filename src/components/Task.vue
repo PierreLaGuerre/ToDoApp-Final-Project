@@ -13,8 +13,14 @@
       Edit
     </button>
 
-    <button class=" bg-blue-900 hover:bg-blue-700 text-cyan-300 rounded-lg py-1 px-2 mb-4">
+    <button v-if="done" @click="toggleButton"
+    class=" bg-blue-900 hover:bg-blue-700 text-cyan-300 rounded-lg py-1 px-2 mb-4">
       Did It
+    </button>
+
+    <button     v-else 
+class=" bg-orange-500 hover:bg-orange-300 text-white rounded-lg py-1 px-2 mb-4">
+   Pending
     </button>
 
     
@@ -30,10 +36,15 @@
 </template>
 
 <script>
-import { defineComponent , ref } from 'vue'
+import { defineComponent } from 'vue'
+import { ref } from 'vue'
 
 
+const done = ref(true);
 
+const toggleButton = () => {
+  done.value = !done.value
+}
 
 export default defineComponent({
     props: {
